@@ -2,43 +2,35 @@
 
 ## Introduction
 
-This repo contains tools to automatically deploy a Grassroots Infrastructure. 
+This repo contains tools to automatically deploy all of the components and third-party tools for a Grassroots Infrastructure. Currently this is for Linux with both MacOS and Windows versions to follow.
 
-## Platforms
 
-### Linux
+## Linux
 
 For Linux, the included script `install_grassroots_linux.sh` can be used. 
 There are a number of configuration options at the start of the script which are detailed below.
 
-0
+
  * *INSTALL_DIR*: This is the directory in which the compiled Grassroots tools will be installed. 
+ 	_e.g._ INSTALL_DIR=/opt/grassroots
+	
  * *SRC_DIR*: This is the directory where the various Grassroots source repositories will be checked out to. 
-This is currently set to `"$( cd "$(dirname "$0")" ; pwd -P )"` which is the currrent directory.
+ This is currently set to `"$( cd "$(dirname "$0")" ; pwd -P )"` which is the currrent directory.
 
-
-
-TO DO:
-
-# array declarations are declare -A for bash and typeset -A for zsh
-ARRAY_DECL="declare -A"
-#ARRAY_DECL="typeset -A" 
-
+ * *ARRAY_DEC*: This is the identifier for array declarations. For Bash this is `declare -A` and in zsh is `typeset -A` 
+ 
+ 
 # For Bash set this to -n, for zsh, leave blank
 LOCAL_VAR_ARG=-n
 
-# This is the library extension for this platform e.g. so for linux, dylib for mac
-LIB_SUFFIX=so
+ * This is the library extension for this platform _e.g._ `so` for linux, `dylib` for mac
+ _e.g._ LIB_SUFFIX=so
 
-# If you need sudo rights to install grassroots
-# then set
-# 
-# SUDO=sudo
-#
-SUDO=
+ * SUDO: If you need sudo rights to install grassroots then set this to `sudo`, otherwise leave it blank
+ _e.g._ SUDO=sudo
 
-# Set this to either linux or mac depending upon your OS
-PLATFORM=linux
+ * Set this to either `linux` or `mac` depending upon your OS
+ _e.g._ PLATFORM=linux
 
 # The path where you want the Grassroots source code to be checked out to
 GRASSROOTS_PROJECT_DIR=$SRC_DIR/Projects/grassroots
