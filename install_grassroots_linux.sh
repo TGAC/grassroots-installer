@@ -161,9 +161,14 @@ SudoEnsureDir() {
 
 		if [ ! -z "$SUDO" ]; then
 			echo "About to run: sudo chown $USER $1"
-			$SUDO chown $USER $1
+			$SUDO chown $1
 		fi
 	fi
+}
+
+
+SudoChown() {
+	$SUDO chown -R $USER $1
 }
 
 
@@ -569,7 +574,7 @@ InstallSQLite() {
 		cd sqlite-amalgamation-$SQLITE_VER 
 		gcc sqlite3.c -o libsqlite3.$LIB_SUFFIX -shared -fPIC 
 		SudoEnsureDir $SQLITE_INSTALL_DIR/include 
-		mkdir -p $SQLITE_INSTALL_DIR/lib 
+		SudoEnsureDir $SQLITE_INSTALL_DIR/lib 
 		cp libsqlite3.$LIB_SUFFIX $SQLITE_INSTALL_DIR/lib/ 
 		cp *.h $SQLITE_INSTALL_DIR/include 
 
@@ -676,13 +681,13 @@ InstallLucene() {
 		tar xzf lucene-${LUCENE_VER}.tgz --directory $GRASSROOTS_EXTRAS_INSTALL_PATH
 		
 		if [ -d $LUCENE_INSTALL_DIR ]; then
-			rm -fr $LUCENE_INSTALL_DIR/*
+			${SUDO} rm -fr $LUCENE_INSTALL_DIR/*
 		fi
 		
 		SudoEnsureDir $LUCENE_INSTALL_DIR
 
-		mv $GRASSROOTS_EXTRAS_INSTALL_PATH/lucene-${LUCENE_VER}/* $LUCENE_INSTALL_DIR/
-
+		${SUDO} mv $GRASSROOTS_EXTRAS_INSTALL_PATH/lucene-${LUCENE_VER}/* $LUCENE_INSTALL_DIR/
+			
 		echo ">>>> END INSTALLING LUCENE"
 
 	fi
@@ -702,12 +707,12 @@ InstallSolr() {
 		tar xzf solr-$SOLR_VER.tgz --directory $GRASSROOTS_EXTRAS_INSTALL_PATH
 
 		if [ -d $SOLR_INSTALL_DIR ]; then
-			rm -fr $SOLR_INSTALL_DIR/*
+			${SUDO} rm -fr $SOLR_INSTALL_DIR/*
 		fi
 			
 		SudoEnsureDir ${SOLR_INSTALL_DIR}
 
-		mv $GRASSROOTS_EXTRAS_INSTALL_PATH/solr-$SOLR_VER/* $SOLR_INSTALL_DIR/
+		${SUDO} mv $GRASSROOTS_EXTRAS_INSTALL_PATH/solr-$SOLR_VER/* $SOLR_INSTALL_DIR/
 
 
 		echo ">>>> END INSTALLING SOLR"
@@ -1120,6 +1125,7 @@ echo ">>> ROOT: $SRC_DIR"
 EnsureDir $SRC_DIR/temp
 cd $SRC_DIR/temp
 
+SudoEnsureDir ${INSTALL_DIR}
 SudoEnsureDir ${GRASSROOTS_INSTALL_DIR}
 
 # Install the depecndencies
