@@ -1120,6 +1120,8 @@ echo ">>> ROOT: $SRC_DIR"
 EnsureDir $SRC_DIR/temp
 cd $SRC_DIR/temp
 
+SudoEnsureDir ${GRASSROOTS_INSTALL_DIR}
+
 # Install the depecndencies
 
 InstallPCRE2
