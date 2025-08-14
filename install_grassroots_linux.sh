@@ -161,7 +161,7 @@ SudoEnsureDir() {
 
 		if [ ! -z "$SUDO" ]; then
 			echo "About to run: sudo chown $USER $1"
-			$SUDO chown $1
+			SudoChown $1
 		fi
 	fi
 }
