@@ -640,6 +640,10 @@ InstallHTSLib () {
 		tar xjf htslib-$HTSLIB_VER.tar.bz2 
 		cd htslib-$HTSLIB_VER 
 		./configure --prefix=$HTSLIB_INSTALL_DIR --disable-bz2 --disable-lzma 
+			
+		SudoEnsureDir ${HTSLIB_INSTALL_DIR}/lib 
+		SudoEnsureDir ${HTSLIB_INSTALL_DIR}/include
+
 		make install 
 
 		echo ">>>> END INSTALLING HTSLIB"
