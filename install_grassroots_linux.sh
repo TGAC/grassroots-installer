@@ -737,7 +737,7 @@ InstallSolr() {
 			
 		SudoEnsureDir ${SOLR_INSTALL_DIR}
 
-		${SUDO} solr-$SOLR_VER/* $SOLR_INSTALL_DIR/
+		${SUDO} mv solr-$SOLR_VER/* $SOLR_INSTALL_DIR/
 
 
 		echo ">>>> END INSTALLING SOLR"

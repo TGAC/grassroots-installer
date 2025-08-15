@@ -8,6 +8,13 @@ This repo contains tools to automatically deploy all of the components and third
 ## Linux
 
 For Linux, the included script `install_grassroots_linux.sh` can be used. 
+To configure your installation, you need to set a number of variables and this is done in a file called `user.prefs`. 
+An example file is included in this repo, so if you haven't already, use this to create an initial version of your 'user.prefs' which you can do by
+
+```
+cp example_user.prefs user.prefs
+```
+
 There are a number of configuration options at the start of the script which are detailed below.
 
 
