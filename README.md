@@ -60,41 +60,36 @@ This file contains a number of configuration optionss which are detailed below.
 
    _e.g._ to listen on port 2000 then you will need `APACHE_PORT=2000`
 
-# This is the web path that Grassroots backend server will be working on
-APACHE_GRASSROOTS_LOCATION=grassroots/public_backend
+ * **APACHE_GRASSROOTS_LOCATION**: This is the web path that Grassroots backend server will be working on and will be the 
+ value used in the _conf/extra/grassroots.conf_ file within Apache to specify the web address Apache will use for communicating
+ with the Grassroots server.
+ By default this is set to `grassroots/public_backend`
 
-# This is the name of the Grassroots config that we will generate
-GRASSROOTS_SERVER_CONFIG=public
+ * **GRASSROOTS_SERVER_CONFIG**: This is the name of the Grassroots config that we will generate within the _config_ folder in Grassroots.
 
-# This is the name that this Grassroots Server will use
-PROVIDER_NAME=localhost
+ * **PROVIDER_NAME**: In the metadata where the Grassroots server describes itself, this is the name that it will use.
 
-# This is the description that this Grassroots Server will use
-PROVIDER_DESCRIPTION="Grassroots running on localhost"
+ * **PROVIDER_DESCRIPTION**: In the metadata where the Grassroots server describes itself, this is the description that it will use.
 
-# This is the logo that this Grassroots Server will use
-PROVIDER_LOGO="grassroots/logo.png"
+ * **PROVIDER_LOGO**: In the metadata where the Grassroots server describes itself, this is the web path for the logo that it will use.
 
- * **MONGORESTORE**: Set this to the path of the mongorestore tool
+   _e.g._ setting `PROVIDER_LOGO="grassroots/logo.png"` would request _grassroots/logo.png_ from teh Apache server.
 
+ * **MONGORESTORE**: If you are installing the demo databases in MongoDB, set this to the path of the mongorestore tool that comes with MongoDB. 
 
  * **FIELD_TRIALS_DB**: This is the name you want to give to the field trials database within MongoDB
 
    _e.g._ to set it to _field\_trials_, use `FIELD_TRIALS_DB=field_trials`
 
-# This is the web address that the Django server will be running on
-DJANGO_URL="http://localhost:8000"
+ * **DJANGO_URL**: This is the web address that the Django server will be running on and by default this will be `http://localhost:8000`
 
 
-# The path to pdflatex used to generate the Study handbooks
-PDFLATEX="/opt/texlive/bin/x86_64-linux/pdflatex"
+ * **PDFLATEX**: This is the path to pdflatex which is used to generate the Study handbooks. Go to [TexLive](https://www.tug.org/texlive/) 
+	for more information on how to install LaTeX.
+
+ * **GEOIFY_API_KEY**: As part of the Field Trials service it uses [Geoify](https://www.geoapify.com/) to get maps for given locations. 
+ This service is free but requires getting an API key to be used and, once you have it, use this key to specify it.
 
 
-# your geoify api key, see https://www.geoapify.com/ for details
-GEOIFY_API_KEY=""
-
-
-# Set this to http or https depending upon if your server is
-# set up for secure traffic or not
-HTTP="http"
+ * **HTTP**: Set this to `http` or `https` depending upon if your server is set up for secure traffic or not.
 
