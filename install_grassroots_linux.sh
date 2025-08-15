@@ -160,7 +160,6 @@ SudoEnsureDir() {
 		$SUDO mkdir -p $1
 
 		if [ ! -z "$SUDO" ]; then
-			echo "About to run: sudo chown $USER $1"
 			SudoChown $1
 		fi
 	fi
@@ -168,7 +167,13 @@ SudoEnsureDir() {
 
 
 SudoChown() {
-	$SUDO chown -R $USER $1
+	local grp=$GROUP
+	if [ -z "${grp}" ]; then
+		grp=$USER
+	fi
+
+	echo "About to run: sudo chown -R $USER:$grp $1"
+	$SUDO chown -R $USER:$grp $1
 }
 
 
@@ -573,6 +578,7 @@ InstallSQLite() {
 		unzip sqlite-amalgamation-$SQLITE_VER.zip 
 		cd sqlite-amalgamation-$SQLITE_VER 
 		gcc sqlite3.c -o libsqlite3.$LIB_SUFFIX -shared -fPIC 
+		SudoEnsureDir $SQLITE_INSTALL_DIR 
 		SudoEnsureDir $SQLITE_INSTALL_DIR/include 
 		SudoEnsureDir $SQLITE_INSTALL_DIR/lib 
 		cp libsqlite3.$LIB_SUFFIX $SQLITE_INSTALL_DIR/lib/ 
@@ -596,6 +602,9 @@ InstallHTMLCXX() {
 		tar xzf htmlcxx-$HTMLCXX_VER.tar.gz 
 		cd htmlcxx-$HTMLCXX_VER 
 		./configure --prefix=$HTMLCXX_INSTALL_DIR
+
+		SudoEnsureDir $HTMLCXX_INSTALL_DIR
+
 		make install 
 
 		echo ">>>> END INSTALLING HTMLCXX"
@@ -617,8 +626,11 @@ InstallHCXSelect () {
 		cd hcxselect-$HCXSELECT_VER/src 
 		patch < $SRC_DIR/hcxselect.patch 
 		make shared DIR_HTMLCXX=$HCXSELECT_INSTALL_DIR
-		mkdir -p $HCXSELECT_INSTALL_DIR/include 
-		mkdir -p $HCXSELECT_INSTALL_DIR/lib 
+
+		SudoEnsureDir ${HTSLIB_INSTALL_DIR}
+		SudoEnsureDir ${HTSLIB_INSTALL_DIR}/include
+		SudoEnsureDir ${HTSLIB_INSTALL_DIR}/lib
+
 		cp libhcxselect.so $HCXSELECT_INSTALL_DIR/lib/ 
 		cp *.h $HCXSELECT_INSTALL_DIR/include	 
 
@@ -641,6 +653,7 @@ InstallHTSLib () {
 		cd htslib-$HTSLIB_VER 
 		./configure --prefix=$HTSLIB_INSTALL_DIR --disable-bz2 --disable-lzma 
 			
+		SudoEnsureDir ${HTSLIB_INSTALL_DIR}
 		SudoEnsureDir ${HTSLIB_INSTALL_DIR}/bin
 		SudoEnsureDir ${HTSLIB_INSTALL_DIR}/include
 		SudoEnsureDir ${HTSLIB_INSTALL_DIR}/lib 
@@ -686,21 +699,23 @@ InstallLucene() {
 		echo ">>>> START INSTALLING LUCENE"
 
 		cd $SRC_DIR/temp
-		wget https://dlcdn.apache.org/lucene/java/$LUCENE_VER/lucene-${LUCENE_VER}.tgz 
-		tar xzf lucene-${LUCENE_VER}.tgz --directory $GRASSROOTS_EXTRAS_INSTALL_PATH
-		
+		wget https://dlcdn.apache.org/lucene/java/$LUCENE_VER/lucene-${LUCENE_VER}.tgz
+		tar xzf lucene-${LUCENE_VER}.tgz
+
+
 		if [ -d $LUCENE_INSTALL_DIR ]; then
 			${SUDO} rm -fr $LUCENE_INSTALL_DIR/*
 		fi
-		
+
 		SudoEnsureDir $LUCENE_INSTALL_DIR
 
-		${SUDO} mv $GRASSROOTS_EXTRAS_INSTALL_PATH/lucene-${LUCENE_VER}/* $LUCENE_INSTALL_DIR/
-			
+		${SUDO} mv lucene-${LUCENE_VER}/* $LUCENE_INSTALL_DIR/
+
 		echo ">>>> END INSTALLING LUCENE"
 
 	fi
 }
+
 
 
 # SOLR
@@ -713,7 +728,7 @@ InstallSolr() {
 
 		cd $SRC_DIR/temp
 		wget --max-redirect 20 "https://www.apache.org/dyn/closer.lua/solr/solr/$SOLR_VER/solr-$SOLR_VER.tgz?action=download" -O solr-$SOLR_VER.tgz
-		tar xzf solr-$SOLR_VER.tgz --directory $GRASSROOTS_EXTRAS_INSTALL_PATH
+		tar xzf solr-$SOLR_VER.tgz 
 
 		if [ -d $SOLR_INSTALL_DIR ]; then
 			${SUDO} rm -fr $SOLR_INSTALL_DIR/*
@@ -721,7 +736,7 @@ InstallSolr() {
 			
 		SudoEnsureDir ${SOLR_INSTALL_DIR}
 
-		${SUDO} mv $GRASSROOTS_EXTRAS_INSTALL_PATH/solr-$SOLR_VER/* $SOLR_INSTALL_DIR/
+		${SUDO} solr-$SOLR_VER/* $SOLR_INSTALL_DIR/
 
 
 		echo ">>>> END INSTALLING SOLR"
@@ -817,9 +832,8 @@ WriteApacheGrassrootsConfig() {
 
 
 InstallDemoDatabases() {
-	read -p "Would you like to install the demo field trial data? [y/N] " -n 1 -r
-	echo    # (optional) move to a new line
-	if [[ $REPLY =~ ^[Yy]$ ]]; then
+
+	if [[ ${INSTALL_DEMO_DBS} =~ ^[Yy]$ ]]; then
 		# Get the demo mongodb and lucene databases
 		echo "Install the dbs"
 		local server="https://grassroots.tools/demo/downloads/"

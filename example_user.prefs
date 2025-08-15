@@ -34,9 +34,13 @@ GRASSROOTS_INSTALL_DIR=$INSTALL_DIR/grassroots
 
 
 # If you are needing to use sudo to install
-# then this will set the owner
+# then this will set the owner's username and group
 USER=billy
+GROUP=my_group
 
+
+# Set this to Y to install the demo field trial databases
+INSTALL_DEMO_DBS=Y
 
 # The port to run apache on
 APACHE_PORT=2000
