@@ -219,6 +219,7 @@ WriteDependencies() {
 	echo -e "export PCRE_HOME := $PCRE_INSTALL_DIR" >> dependencies.properties
 	echo -e "export PCRE2_HOME := $PCRE2_INSTALL_DIR" >> dependencies.properties
 	echo -e "export SQLITE_HOME := $SQLITE_INSTALL_DIR\n" >> dependencies.properties
+	echo -e "export UUID_HOME := $LIBUUID_INSTALL_DIR\n" >> dependencies.properties
 
 
 	echo -e "export DIR_APACHE := $APACHE_INSTALL_DIR" >> dependencies.properties
