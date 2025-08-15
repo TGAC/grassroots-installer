@@ -1150,10 +1150,10 @@ ConfigureDjango() {
 
 	echo -e "# The filesystem path to where the static files" >> "${django}"
 	echo -e "# that Django uses will be installed" >> "${django}"
-	echo -e "STATIC_ROOT = ${APACHE_INSTALL_DIR}/htdocs/static\n" >> "${django}"
+	echo -e "STATIC_ROOT = \"${APACHE_INSTALL_DIR}/htdocs/static\"\n" >> "${django}"
 
 	echo -e "# The web address to access the static files" >> "${django}"
-	echo -e "STATIC_URL = '/static/'\n" >> "${django}"
+	echo -e "STATIC_URL = \"/static/\"\n" >> "${django}"
 
 	echo -e "# The web address for the grassroots server to connect to" >> "${django}"
 	echo -e "SERVER_URL = \"${HTTP}://localhost:${APACHE_PORT}/${APACHE_GRASSROOTS_LOCATION}\"\n" >> "${django}"
@@ -1164,16 +1164,16 @@ ConfigureDjango() {
 	echo -e "SECRET_KEY = \"${security_key}\"\n" >> "${django}"
 	
 	echo -e "# The Base URL used to generate the links from the single study page to the plots, etc." >> "${django}"
-	echo -e "BASE_URL = "${HTTP}://localhost:${APACHE_PORT}"\n" >> "${django}"
+	echo -e "BASE_URL = \"${HTTP}://localhost:${APACHE_PORT}\"\n" >> "${django}"
 
 	echo -e "# The path for the uploaded photos" >> "${django}"
 	echo -e "MEDIA_ROOT = \"${APACHE_INSTALL_DIR}/htdocs/media\"\n" >> "${django}"
 
 	echo -e "# The url for the uploaded photos" >> "${django}"
-	echo -e "MEDIA_URL = \"media\"\n" >> "${django}"
+	echo -e "MEDIA_URL = \"/media/\"\n" >> "${django}"
 
 	echo -e "# The url for the photo server." >> "${django}"
-	echo -e "PHOTO_URL_SERVER = "${HTTP}://localhost:${APACHE_PORT}"\n" >> "${django}"
+	echo -e "PHOTO_URL_SERVER = \"${HTTP}://localhost:${APACHE_PORT}\"\n" >> "${django}"
 
 
 	echo -e "# Set this to True to enable debugging output" >> "${django}"
