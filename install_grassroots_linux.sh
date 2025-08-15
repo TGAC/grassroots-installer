@@ -641,8 +641,10 @@ InstallHTSLib () {
 		cd htslib-$HTSLIB_VER 
 		./configure --prefix=$HTSLIB_INSTALL_DIR --disable-bz2 --disable-lzma 
 			
-		SudoEnsureDir ${HTSLIB_INSTALL_DIR}/lib 
+		SudoEnsureDir ${HTSLIB_INSTALL_DIR}/bin
 		SudoEnsureDir ${HTSLIB_INSTALL_DIR}/include
+		SudoEnsureDir ${HTSLIB_INSTALL_DIR}/lib 
+		SudoEnsureDir ${HTSLIB_INSTALL_DIR}/share
 
 		make install 
 
