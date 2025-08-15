@@ -15,7 +15,8 @@ An example file is included in this repo, so if you haven't already, use this to
 cp example_user.prefs user.prefs
 ```
 
-There are a number of configuration options at the start of the script which are detailed below.
+You can then proceed to edit `user.prefs` for your set-up. 
+This file contains a number of configuration optionss which are detailed below.
 
 
  * **INSTALL_DIR**: This is the directory in which the compiled Grassroots tools will be installed. 
@@ -31,32 +32,33 @@ There are a number of configuration options at the start of the script which are
 
  * **LIB_SUFFIX**: This is the library extension for this platform _e.g._ `so` for linux, `dylib` for mac
  
-     _e.g._ LIB_SUFFIX=so
+     _e.g._ `LIB_SUFFIX=so`
 
  * **SUDO**: If you need sudo rights to install grassroots then set this to `sudo`, otherwise leave it blank
  
-     _e.g._ SUDO=sudo
+     _e.g._ `SUDO=sudo`
 
  * **PLATFORM**: Set this to either `linux` or `mac` depending upon your OS
 
-# The path where you want the Grassroots source code to be checked out to
-GRASSROOTS_PROJECT_DIR=$SRC_DIR/Projects/grassroots
+ * **GRASSROOTS_PROJECT_DIR**: The path where you want the Grassroots source code to be checked out to. 
+ By default this is set to `$SRC_DIR/Projects/grassroots`.
 
+ * **GRASSROOTS_INSTALL_DIR**: This is the root path that grassroots will be installed to. 
+ By default this is set to `$INSTALL_DIR/grassroots`
 
-# The root path that grassroots will be installed to
-GRASSROOTS_INSTALL_DIR=$INSTALL_DIR/grassroots
+ * **USER**: If you are needing to use sudo, due to permissions, to install to your chosen destination, then this allows
+ you to change the ownership, after the installation, to another user and not _root_. 
+ 
+   _e.g._ to set the owner to `billy`, use `USER=billy`
 
+ * **GROUP**: If you are needing to use sudo, due to permissions, to install to your chosen destination, then this allows
+ you to change the ownership, after the installation, to another group and not _root_. 
+ 
+   _e.g._ to set the group to `dev`, use `GROUP=dev`
 
-# If you are needing to use sudo to install
-# then this will set the owner
-USER=billy
+ * **APACHE_PORT**: This is the TCP port that Apache will be listening on. 
 
-
-# The port to run apache on
-* **APACHE_PORT**: This is the TCP port that Apache will be listening on. 
-For instance to listen on port 2000 then you will need 
-
-    APACHE_PORT=2000
+   _e.g._ to listen on port 2000 then you will need `APACHE_PORT=2000`
 
 # This is the web path that Grassroots backend server will be working on
 APACHE_GRASSROOTS_LOCATION=grassroots/public_backend
@@ -73,12 +75,12 @@ PROVIDER_DESCRIPTION="Grassroots running on localhost"
 # This is the logo that this Grassroots Server will use
 PROVIDER_LOGO="grassroots/logo.png"
 
-# Set this to the path of the mongorestore tool
-MONGORESTORE=mongorestore
+ * **MONGORESTORE**: Set this to the path of the mongorestore tool
 
-# The name to give to the field trials database
-FIELD_TRIALS_DB=field_trials
 
+ * **FIELD_TRIALS_DB**: This is the name you want to give to the field trials database within MongoDB
+
+   _e.g._ to set it to _field\_trials_, use `FIELD_TRIALS_DB=field_trials`
 
 # This is the web address that the Django server will be running on
 DJANGO_URL="http://localhost:8000"
