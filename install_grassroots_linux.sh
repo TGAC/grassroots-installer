@@ -664,6 +664,9 @@ InstallPCRE() {
 		tar xjf pcre-$PCRE_VER.tar.bz2 
 		cd pcre-$PCRE_VER 
 		./configure --prefix=$PCRE_INSTALL_DIR
+
+		SudoEnsureDir $PCRE_INSTALL_DIR
+		
 		make install 
 
 		echo ">>>> END INSTALLING PCRE"
