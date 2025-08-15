@@ -779,6 +779,49 @@ GetGrassrootsRepos() {
 }
 
 
+
+WriteApacheGrassrootsEnvvars() {
+	local default_envvars=envvars
+	local grassroots_envvars=envvars_grassroots
+	cd ${APACHE_INSTALL_DIR}/bin
+
+	# if there's an existing file, back it up
+	BackUp "${default_envvars}"	
+
+	# add the call to our grassroots envvars file
+	echo -e "\n\n. ${APACHE_INSTALL_DIR}/bin/${grassroots_envvars}" >> ${default_envvars}
+
+	# create the grassroots envvars file
+
+	# back up any existing one
+	BackUp "${grassroots_envvars}"	
+
+	echo -e "#" > ${grassroots_envvars}
+
+	echo -e "LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:${GRASSROOTS_INSTALL_DIR}/lib" >> ${grassroots_envvars}
+	echo -e "LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:${HCXSELECT_INSTALL_DIR}/lib" >> ${grassroots_envvars}
+
+	echo -e "LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:${HTMLCXX_INSTALL_DIR}/lib" >> ${grassroots_envvars}
+	echo -e "LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:${HTSLIB_INSTALL_DIR}/lib" >> ${grassroots_envvars}
+
+	echo -e "LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:${JANSSON_INSTALL_DIR}/lib" >> ${grassroots_envvars}
+	echo -e "LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:${LIBEXIF_INSTALL_DIR}/lib" >> ${grassroots_envvars}
+
+	echo -e "LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:${LIBUUID_INSTALL_DIR}/lib" >> ${grassroots_envvars}
+	echo -e "LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:${MONGOC_INSTALL_DIR}/lib" >> ${grassroots_envvars}
+
+	echo -e "LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:${PCRE_INSTALL_DIR}/lib" >> ${grassroots_envvars}
+	echo -e "LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:${SQLITE_INSTALL_DIR}/lib" >> ${grassroots_envvars}
+	
+	echo -e "LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:${GRASSROOTS_INSTALL_DIR}/services" >> ${grassroots_envvars}
+
+	echo -e "export LD_LIBRARY_PATH" >> ${grassroots_envvars}
+	echo -e "#" >> ${grassroots_envvars}
+
+}
+
+
+
 # Write the Grassroots Apache config and 
 # add the include statement for it, if not 
 # already there, to the main httpd.conf file
@@ -1200,6 +1243,9 @@ WriteGrassrootsServerConfig
 
 
 WriteApacheGrassrootsConfig
+
+
+WriteApacheGrassrootsEnvvars
 
 
 WriteFieldTrialsServiceConfigs
