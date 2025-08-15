@@ -19,7 +19,7 @@ HCXSELECT_VER=1.1
 HTMLCXX_VER=0.86
 HTSLIB_VER=1.21
 JANSSON_VER=2.14
-LIBEXIF_VER=0.6.24
+LIBEXIF_VER=0.6.25
 LIBUUID_VER=1.0.3
 LUCENE_VER=9.12.2
 MONGO_C_VER=2.0.2
@@ -542,7 +542,7 @@ InstallLibExif() {
 
 		cd $SRC_DIR/temp
 
-		GetAndUnpackArchive libexif-$LIBEXIF_VER https://github.com/libexif/libexif/releases/tag/v$LIBEXIF_VER zip
+		GetAndUnpackArchive libexif-$LIBEXIF_VER https://github.com/libexif/libexif/releases/download/v$LIBEXIF_VER zip
 		cd libexif-$LIBEXIF_VER 
 
 		./configure --prefix=$LIBEXIF_INSTALL_DIR 
