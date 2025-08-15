@@ -1182,6 +1182,14 @@ ConfigureDjango() {
 }
 
 
+InstallGrassroots() {
+	cd $GRASSROOTS_PROJECT_DIR/build-config
+
+	make -C unix/${PLATFORM}
+	make -C unix/${PLATFORM} install	
+}
+
+
 #######################
 ### START OF SCRIPT ###
 #######################
@@ -1264,3 +1272,4 @@ ConfigureDjango
 InstallDemoDatabases
 
 
+InstallGrassroots
