@@ -858,10 +858,10 @@ WriteApacheGrassrootsConfig() {
 	echo -e "\tGrassrootsRoot ${GRASSROOTS_INSTALL_DIR}\n" >> ${gr_conf}
 
 	echo -e "\t# The global configuration file to use" >> ${gr_conf}
-	echo -e "\tGrassrootsConfig ${GRASSROOTS_SERVER_CONFIG}_config\n" >> ${gr_conf}
+	echo -e "\tGrassrootsConfig config/${GRASSROOTS_SERVER_CONFIG}_config\n" >> ${gr_conf}
 
 	echo -e "\t# The path to the service configuration files" >> ${gr_conf}
-	echo -e "\tGrassrootsServicesConfigPath ${GRASSROOTS_SERVER_CONFIG}\n" >> ${gr_conf}
+	echo -e "\tGrassrootsServicesConfigPath config/${GRASSROOTS_SERVER_CONFIG}\n" >> ${gr_conf}
 
 
 	echo -e "</LocationMatch>" >> ${gr_conf}
