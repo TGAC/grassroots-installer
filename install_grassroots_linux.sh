@@ -935,7 +935,7 @@ WriteFieldTrialsServiceConfigs(){
 	BaseWriteFieldTrialsServiceConfig "${cfg_file}" "grassroots/images/polygonchange"
 	echo -e ",\n\t\"view_study_url\": \"${DJANGO_URL}/fieldtrial/study/\"," >> "${cfg_file}"
   echo -e "\t\"fd_path\": \"${APACHE_INSTALL_DIR}/grassroots/frictionless\"," >> "${cfg_file}"
-  echo -e "\t\"fd_url\": \"${HTTP}://localhost:${APACHE_PORT}/grassroots/frictionless\"">> "${cfg_file}"
+  echo -e "\t\"fd_url\": \"${HTTP}://localhost:${APACHE_PORT}/grassroots/frictionless\",">> "${cfg_file}"
   echo -e "\t\"wastebasket_path\": \"${GRASSROOTS_INSTALL_DIR}/working_directory/field_trials/backups\",">> "${cfg_file}"
   echo -e "\t\"pdflatex_path\": \"${PDFLATEX}\",">> "${cfg_file}"
   echo -e "\t\"geoapify_api_key\": \"${GEOIFY_API_KEY}\",">> "${cfg_file}"
@@ -947,7 +947,7 @@ WriteFieldTrialsServiceConfigs(){
 	BaseWriteFieldTrialsServiceConfig "${cfg_file}" "grassroots/images/polygonchange"
 	echo -e ",\n\t\"view_study_url\": \"${DJANGO_URL}/fieldtrial/study/\"," >> "${cfg_file}"
   echo -e "\t\"fd_path\": \"${APACHE_INSTALL_DIR}/grassroots/frictionless\"," >> "${cfg_file}"
-  echo -e "\t\"fd_url\": \"${HTTP}://localhost:${APACHE_PORT}/grassroots/frictionless\"" >> "${cfg_file}"
+  echo -e "\t\"fd_url\": \"${HTTP}://localhost:${APACHE_PORT}/grassroots/frictionless\"," >> "${cfg_file}"
   echo -e "\t\"wastebasket_path\": \"${GRASSROOTS_INSTALL_DIR}/working_directory/field_trials/backups\"," >> "${cfg_file}"
   echo -e "\t\"pdflatex_path\": \"${PDFLATEX}\"," >> "${cfg_file}"
   echo -e "\t\"geoapify_api_key\": \"${GEOIFY_API_KEY}\"," >> "${cfg_file}"
@@ -959,9 +959,9 @@ WriteFieldTrialsServiceConfigs(){
 	BaseWriteFieldTrialsServiceConfig "${cfg_file}" "grassroots/images/polygonchange"
 	echo -e ",\n\t\"view_study_url\": \"${DJANGO_URL}/fieldtrial/study/\"," >> "${cfg_file}"
   echo -e "\t\"fd_path\": \"${APACHE_INSTALL_DIR}/grassroots/frictionless\"," >> "${cfg_file}"
-  echo -e "\t\"fd_url\": \"${HTTP}://localhost:${APACHE_PORT}/grassroots/frictionless\"" >> "${cfg_file}"
+  echo -e "\t\"fd_url\": \"${HTTP}://localhost:${APACHE_PORT}/grassroots/frictionless\"," >> "${cfg_file}"
   echo -e "\t\"use_mv_cache\": false," >> "${cfg_file}"
-  echo -e "\t\"images\": {," >> "${cfg_file}"
+  echo -e "\t\"images\": {" >> "${cfg_file}"
 
   echo -e "\t\t\"Grassroots:Location\": \"${HTTP}://localhost:${APACHE_PORT}/grassroots/images/map\"," >> "${cfg_file}"
   echo -e "\t\t\"Grassroots:Study\": \"${HTTP}://localhost:${APACHE_PORT}/grassroots/images/polygonchange\"," >> "${cfg_file}"
@@ -1087,35 +1087,35 @@ WriteSearchGrassrootsConfig() {
 	echo -e "{" > "${cfg_file}"
 	echo -e "\t\"so:image\": \"${HTTP}://localhost:${APACHE_PORT}/grassroots/images/search\"," >> "${cfg_file}"
 
-	echo -e "\t\"facets\": [{," >> "${cfg_file}"
+	echo -e "\t\"facets\": [{" >> "${cfg_file}"
 
 	echo -e "\t\t\"so:name\": \"Dataset\"," >> "${cfg_file}"
 	echo -e "\t\t\"so:description\": \"Dataset\"" >> "${cfg_file}"
-	echo -e "\t}, {," >> "${cfg_file}"
+	echo -e "\t}, {" >> "${cfg_file}"
 
 	echo -e "\t\t\"so:name\": \"Service\"," >> "${cfg_file}"
 	echo -e "\t\t\"so:description\": \"Service\"" >> "${cfg_file}"
-	echo -e "\t}, {," >> "${cfg_file}"
+	echo -e "\t}, {" >> "${cfg_file}"
 
 	echo -e "\t\t\"so:name\": \"Field Trial\"," >> "${cfg_file}"
 	echo -e "\t\t\"so:description\": \"Field Trial\"" >> "${cfg_file}"
-	echo -e "\t}, {," >> "${cfg_file}"
+	echo -e "\t}, {" >> "${cfg_file}"
 
 	echo -e "\t\t\"so:name\": \"Study\"," >> "${cfg_file}"
 	echo -e "\t\t\"so:description\": \"Study\"" >> "${cfg_file}"
-	echo -e "\t}, {," >> "${cfg_file}"
+	echo -e "\t}, {" >> "${cfg_file}"
 
 	echo -e "\t\t\"so:name\": \"Location\"," >> "${cfg_file}"
 	echo -e "\t\t\"so:description\": \"Location\"" >> "${cfg_file}"
-	echo -e "\t}, {," >> "${cfg_file}"
+	echo -e "\t}, {" >> "${cfg_file}"
 
 	echo -e "\t\t\"so:name\": \"Measured Variable\"," >> "${cfg_file}"
 	echo -e "\t\t\"so:description\": \"Measured Variable\"" >> "${cfg_file}"
-	echo -e "\t}, {," >> "${cfg_file}"
+	echo -e "\t}, {" >> "${cfg_file}"
 
 	echo -e "\t\t\"so:name\": \"Programme\"," >> "${cfg_file}"
 	echo -e "\t\t\"so:description\": \"Programme\"" >> "${cfg_file}"
-	echo -e "\t}, {," >> "${cfg_file}"
+	echo -e "\t}, {" >> "${cfg_file}"
 
 	echo -e "\t\t\"so:name\": \"Publication\"," >> "${cfg_file}"
 	echo -e "\t\t\"so:description\": \"Publication\"" >> "${cfg_file}"
@@ -1134,7 +1134,7 @@ WriteUsersSubmissionConfig() {
 	echo -e "\t\"so:image\": \"${HTTP}://localhost:${APACHE_PORT}/grassroots/images/useradd\"," >> "${cfg_file}"
 	echo -e "\t\"database\": \"users_and_groups\"," >> "${cfg_file}"
 	echo -e "\t\"users_collection\": \"users\"," >> "${cfg_file}"
-	echo -e "\t\"groups_collection\": \"groups\"," >> "${cfg_file}"
+	echo -e "\t\"groups_collection\": \"groups\"" >> "${cfg_file}"
 	echo -e "}" >> "${cfg_file}"
 }
 
