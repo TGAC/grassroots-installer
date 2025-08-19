@@ -219,6 +219,7 @@ WriteDependencies() {
 	echo -e "export PCRE_HOME := $PCRE_INSTALL_DIR" >> dependencies.properties
 	echo -e "export PCRE2_HOME := $PCRE2_INSTALL_DIR" >> dependencies.properties
 	echo -e "export SQLITE_HOME := $SQLITE_INSTALL_DIR\n" >> dependencies.properties
+	echo -e "export UUID_HOME := $LIBUUID_INSTALL_DIR\n" >> dependencies.properties
 
 
 	echo -e "export DIR_APACHE := $APACHE_INSTALL_DIR" >> dependencies.properties
@@ -736,7 +737,7 @@ InstallSolr() {
 			
 		SudoEnsureDir ${SOLR_INSTALL_DIR}
 
-		${SUDO} solr-$SOLR_VER/* $SOLR_INSTALL_DIR/
+		${SUDO} mv solr-$SOLR_VER/* $SOLR_INSTALL_DIR/
 
 
 		echo ">>>> END INSTALLING SOLR"
@@ -1149,10 +1150,10 @@ ConfigureDjango() {
 
 	echo -e "# The filesystem path to where the static files" >> "${django}"
 	echo -e "# that Django uses will be installed" >> "${django}"
-	echo -e "STATIC_ROOT = ${APACHE_INSTALL_DIR}/htdocs/static\n" >> "${django}"
+	echo -e "STATIC_ROOT = \"${APACHE_INSTALL_DIR}/htdocs/static\"\n" >> "${django}"
 
 	echo -e "# The web address to access the static files" >> "${django}"
-	echo -e "STATIC_URL = '/static/'\n" >> "${django}"
+	echo -e "STATIC_URL = \"/static/\"\n" >> "${django}"
 
 	echo -e "# The web address for the grassroots server to connect to" >> "${django}"
 	echo -e "SERVER_URL = \"${HTTP}://localhost:${APACHE_PORT}/${APACHE_GRASSROOTS_LOCATION}\"\n" >> "${django}"
@@ -1163,21 +1164,29 @@ ConfigureDjango() {
 	echo -e "SECRET_KEY = \"${security_key}\"\n" >> "${django}"
 	
 	echo -e "# The Base URL used to generate the links from the single study page to the plots, etc." >> "${django}"
-	echo -e "BASE_URL = "${HTTP}://localhost:${APACHE_PORT}"\n" >> "${django}"
+	echo -e "BASE_URL = \"${HTTP}://localhost:${APACHE_PORT}\"\n" >> "${django}"
 
 	echo -e "# The path for the uploaded photos" >> "${django}"
 	echo -e "MEDIA_ROOT = \"${APACHE_INSTALL_DIR}/htdocs/media\"\n" >> "${django}"
 
 	echo -e "# The url for the uploaded photos" >> "${django}"
-	echo -e "MEDIA_URL = \"media\"\n" >> "${django}"
+	echo -e "MEDIA_URL = \"/media/\"\n" >> "${django}"
 
 	echo -e "# The url for the photo server." >> "${django}"
-	echo -e "PHOTO_URL_SERVER = "${HTTP}://localhost:${APACHE_PORT}"\n" >> "${django}"
+	echo -e "PHOTO_URL_SERVER = \"${HTTP}://localhost:${APACHE_PORT}\"\n" >> "${django}"
 
 
 	echo -e "# Set this to True to enable debugging output" >> "${django}"
 	echo -e "DEBUG = False\n" >> "${django}"
 
+}
+
+
+InstallGrassroots() {
+	cd $GRASSROOTS_PROJECT_DIR/build-config
+
+	make -C unix/${PLATFORM}
+	make -C unix/${PLATFORM} install	
 }
 
 
@@ -1263,3 +1272,4 @@ ConfigureDjango
 InstallDemoDatabases
 
 
+InstallGrassroots
