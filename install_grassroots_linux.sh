@@ -865,7 +865,18 @@ WriteApacheGrassrootsConfig() {
 	echo -e "\tGrassrootsServicesConfigPath config/${GRASSROOTS_SERVER_CONFIG}\n" >> ${gr_conf}
 
 
-	echo -e "</LocationMatch>" >> ${gr_conf}
+	echo -e "</LocationMatch>\n\n" >> ${gr_conf}
+
+
+	# Add the Django proxies
+	echo -e "ProxyPass /service ${DJANGO_URL}/service" >> ${gr_conf}
+	echo -e "ProxyPassReverse /service ${DJANGO_URL}/service" >> ${gr_conf}
+	echo -e "ProxyPass /fieldtrial ${DJANGO_URL}/fieldtrial" >> ${gr_conf}
+	echo -e "ProxyPassReverse /fieldtrial ${DJANGO_URL}/fieldtrial" >> ${gr_conf}
+	echo -e "ProxyPass /photo_receiver ${DJANGO_URL}/photo_receiver" >> ${gr_conf}
+	echo -e "ProxyPassReverse /photo_receiver ${DJANGO_URL}/photo_receiver" >> ${gr_conf}
+	echo -e "ProxyPass /filedownload ${DJANGO_URL}/filedownload" >> ${gr_conf}
+	echo -e "ProxyPassReverse /filedownload ${DJANGO_URL}/filedownload" >> ${gr_conf}
 
 	# Add the config file to the main apache config 
 	# if it's not already there
