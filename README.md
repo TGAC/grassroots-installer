@@ -73,7 +73,7 @@ This file contains a number of configuration optionss which are detailed below.
 
  * **PROVIDER_LOGO**: In the metadata where the Grassroots server describes itself, this is the web path for the logo that it will use.
 
-   _e.g._ setting `PROVIDER_LOGO="grassroots/logo.png"` would request _grassroots/logo.png_ from teh Apache server.
+   _e.g._ setting `PROVIDER_LOGO="grassroots/logo.png"` would request _grassroots/logo.png_ from the Apache server.
 
  * **MONGORESTORE**: If you are installing the demo databases in MongoDB, set this to the path of the mongorestore tool that comes with MongoDB. 
 
