@@ -244,8 +244,10 @@ WriteDependencies() {
 
 	echo -e "export BSON_LIB_NAME := $BSON_LIB_NAME" >> dependencies.properties
 	echo -e "export BSON_INC_NAME := $BSON_INC_NAME" >> dependencies.properties
+	echo -e "export BSON_INC_SUBFOLDER := $BSON_INC_NAME" >> dependencies.properties
 	echo -e "export MONGO_LIB_NAME := $MONGO_LIB_NAME" >> dependencies.properties
 	echo -e "export MONGO_INC_NAME := $MONGO_INC_NAME" >> dependencies.properties
+	echo -e "export MONGO_INC_SUBFOLDER := $BSON_INC_NAME" >> dependencies.properties
 
 
 #LUCENE_INSTALL_DIR=$GRASSROOTS_EXTRAS_INSTALL_PATH/lucene
