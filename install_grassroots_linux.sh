@@ -420,7 +420,7 @@ InstallApache() {
 
 		echo "$APACHE_INSTALL_DIR/bin/apxs doesn't exist"
 		echo ">>>> START INSTALLAING APACHE"
-		GetAndUnpackArchive httpd-$HTTPD_VER https://dlcdn.apache.org/httpd/
+		GetAndUnpackArchive httpd-$HTTPD_VER https://archive.apache.org/dist/httpd/
 		GetAndUnpackArchive apr-$APR_VER https://dlcdn.apache.org/apr/
 		GetAndUnpackArchive apr-util-$APR_UTIL_VER https://dlcdn.apache.org/apr/
 		tar zxf apr-util-$APR_UTIL_VER.tar.gz
@@ -702,7 +702,7 @@ InstallLucene() {
 		echo ">>>> START INSTALLING LUCENE"
 
 		cd $SRC_DIR/temp
-		wget https://dlcdn.apache.org/lucene/java/$LUCENE_VER/lucene-${LUCENE_VER}.tgz
+		wget https://archive.apache.org/dist/lucene/java/$LUCENE_VER/lucene-${LUCENE_VER}.tgz
 		tar xzf lucene-${LUCENE_VER}.tgz
 
 
@@ -893,6 +893,7 @@ InstallDemoDatabases() {
 	if [[ ${INSTALL_DEMO_DBS} =~ ^[Yy]$ ]]; then
 		# Get the demo mongodb and lucene databases
 		echo "Install the dbs"
+		# Currently not working, Apache returning "503 Service Unavailable" for https://grassroots.tools/demo/ URLs
 		local server="https://grassroots.tools/demo/downloads/"
 		local lucene_db="demo_lucene_db"
 		local field_trials_db="demo_field_trials"
